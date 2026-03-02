@@ -12,3 +12,5 @@ Customer Support — ID тикета, время реакции, время ре
 Запуск билда Docker.
 
 <img width="1426" height="339" alt="image" src="https://github.com/user-attachments/assets/db1ab217-8a4b-4679-9207-c50a196ee04a" />
+
+<img width="923" height="341" alt="image" src="https://github.com/user-attachments/assets/0b22a6c2-4afd-4a8b-8f68-9cebc07e337f" />
