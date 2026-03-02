@@ -60,12 +60,12 @@ def get_weighted_category() -> str:
 
 def generate_response_time(category: str) -> int:
     base_times = {
-        "Техническая проблема": random.uniform(30, 180),      # 0.5-3 часа
-        "Вопрос по оплате": random.uniform(15, 120),          # 15 мин - 2 часа
-        "Консультация": random.uniform(10, 90),               # 10 мин - 1.5 часа
-        "Жалоба на качество": random.uniform(20, 150),        # 20 мин - 2.5 часа
-        "Предложение": random.uniform(60, 240),               # 1-4 часа
-        "Другое": random.uniform(30, 200),                    # 0.5-3.3 часа
+        "Техническая проблема": random.uniform(30, 180),      # 0.5 - 3 h
+        "Вопрос по оплате": random.uniform(15, 120),          # 15 - 2 h
+        "Консультация": random.uniform(10, 90),               # 10 - 1.5 h
+        "Жалоба на качество": random.uniform(20, 150),        # 0.33 - 2.5 h
+        "Предложение": random.uniform(60, 240),               # 1-4 h
+        "Другое": random.uniform(30, 200),                    # 0.5 - 3.3 h
     }
     
     response_time = base_times[category]
