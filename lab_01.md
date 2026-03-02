@@ -21,12 +21,23 @@
 
 <img width="660" height="253" alt="image" src="https://github.com/user-attachments/assets/96500c7b-4297-46c3-95dc-96e44c63c91c" />
 
+Сделал файлы исполняемыми
 
+<img width="901" height="359" alt="image" src="https://github.com/user-attachments/assets/04e26ec8-56e5-49fb-a36c-c6ef122d90d9" />
 
+Запуск контейнеров
+
+<img width="778" height="364" alt="image" src="https://github.com/user-attachments/assets/4bec42b7-87de-444b-b3ad-971cc6dc8941" />
+
+> .
 
 Проверка работы сервиса в браузере
 
+<img width="2302" height="1189" alt="image" src="https://github.com/user-attachments/assets/e3c3483a-b47e-46b1-96db-2508058eadc9" />
+
 <img width="2307" height="1185" alt="image" src="https://github.com/user-attachments/assets/aa4dce13-e491-4781-b3e2-6b415580304c" />
+
+<img width="2317" height="1230" alt="image" src="https://github.com/user-attachments/assets/2126fab5-e3cb-4782-91a3-df3c6599826a" />
 
 <img width="2319" height="1307" alt="image" src="https://github.com/user-attachments/assets/8065752e-ef4a-44e0-861a-55347751df05" />
 
