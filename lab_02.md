@@ -12,7 +12,7 @@ Customer Support — ID тикета, время реакции, время ре
 
 ### **Шаг №1. Настройка файла generate_data.py**
 
-Изменения затронули почти весь файл, т.к. была другая тема и нужно было "подбить" генератор данных под поставленную предметную область
+Изменения затронули почти весь файл, т.к. была другая тема и нужно было "подбить" генератор данных под поставленную предметную область, а также добавить обработку CLI аргументов.
 
 <details>
   <summary> Код Python-файла </summary>
@@ -233,13 +233,62 @@ if __name__ == "__main__":
   
 </details>
 
+### **Шаг №2. Были реализованы 3 CLI аргумента:**
+
+* --output (можно изменять путь для сохранения CSV файла)
+* --count (можно изменять количество генерируемых данных)
+* --seed (можно изменять для изменения рандома данных (ключ рандома/соль))
 
 <details>
-<summary> Запуск билда Docker. </summary>
+  <summary> Часть кода с реализацией CLI аргументов (сама функция) </summary>
+  
+  ```py
+  # --- CLI ARGUMENTS VARIANT 19 CHERENKOV ---
+
+  def parse_arguments():
+      """Парсинг аргументов командной строки"""
+      parser = argparse.ArgumentParser(
+          description="Customer support SINTETIC generator",
+          formatter_class=argparse.RawDescriptionHelpFormatter
+      )
+  
+      parser.add_argument(
+          "--count", "-c",
+          type=int,
+          default=NUM_ROWS,
+          help=f"Количество генерируемых строк (по умолчанию: {NUM_ROWS})"
+      )
+  
+      parser.add_argument(
+          "--output", "-o",
+          type=str,
+          default=OUTPUT_FILE,
+          help=f"Путь для сохранения CSV файла (по умолчанию: {OUTPUT_FILE})"
+      )
+  
+      parser.add_argument(
+          "--seed", "-s",
+          type=int,
+          default=SEED,
+          help=f"Seed для воспроизводимости (по умолчанию: {SEED})"
+      )
+  
+      return parser.parse_args()
+  ```
+
+</details>
+
+### **Шаг 3. Изменения лоадера в PostgreSQL**
+
+Был изменен DDL-скрипт
+
+<img width="779" height="304" alt="image" src="https://github.com/user-attachments/assets/662559f2-5107-45ee-903e-cfca40cf7731" />
+
+### **Шаг 4. Запуск билда Docker**
+
+После всех изменений, был произведен запуск билда Docker.
 
 <img width="1426" height="339" alt="image" src="https://github.com/user-attachments/assets/db1ab217-8a4b-4679-9207-c50a196ee04a" />
 
 <img width="2040" height="577" alt="image" src="https://github.com/user-attachments/assets/007dd73a-744c-411d-b00d-61d4e671a73a" />
-
-</details>
 
