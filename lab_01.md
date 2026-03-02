@@ -8,9 +8,20 @@
 <img width="891" height="584" alt="image" src="https://github.com/user-attachments/assets/78984665-0dbd-47bc-8ce2-214d694c2797" />
 
 
-Пул образов
+Создания sh файла для образа odoo:
 
-<img width="1449" height="119" alt="image" src="https://github.com/user-attachments/assets/eb791745-e84b-41dd-8ca8-a52d27abbbc4" />
+<img width="473" height="297" alt="image" src="https://github.com/user-attachments/assets/4fa4b3c4-e5db-4966-aca1-0887514cd12b" />
+
+Создание сети для взаимодействия odoo и postgresql
+
+<img width="831" height="212" alt="image" src="https://github.com/user-attachments/assets/146b693a-b98b-49ac-9b37-d8acc0f2f023" />
+
+
+Создание образа Postgresql
+
+<img width="660" height="253" alt="image" src="https://github.com/user-attachments/assets/96500c7b-4297-46c3-95dc-96e44c63c91c" />
+
+
 
 
 Проверка работы сервиса в браузере
