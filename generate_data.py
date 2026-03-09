@@ -62,16 +62,13 @@ def generate_response_time(category: str, created_at: datetime) -> int:
         "Другое": 10,
     }
     
-    # В выходные ответы немного медленнее (меньше персонала)
     weekend_multiplier = 1.3 if is_weekend(created_at) else 1.0
     
     response_time = base_response[category] * weekend_multiplier
-    
-    # Добавляем случайную вариацию
+
     variation = random.uniform(0.8, 1.2)
     response_time = int(response_time * variation)
-    
-    # Ограничиваем время ответа
+
     return min(response_time, 120)
 
 
@@ -84,7 +81,6 @@ def generate_resolution_time(category: str, response_time: int, created_at: date
     1. Чем быстрее ответ - тем быстрее решение (коэффициент корреляции ~0.7)
     2. В будни решение быстрее, чем в выходные
     """
-    # Базовая сложность решения по категориям
     complexity = {
         "Техническая проблема": 2.2,      # Самые сложные
         "Вопрос по оплате": 0.9,           # Средние
@@ -94,27 +90,18 @@ def generate_resolution_time(category: str, response_time: int, created_at: date
         "Другое": 1.2,
     }
     
-    # ЗАКОНОМЕРНОСТЬ 1: Прямая зависимость от времени ответа
-    # Чем быстрее ответ, тем быстрее решение (коэффициент 0.8)
     response_impact = response_time * 0.8
-    
-    # ЗАКОНОМЕРНОСТЬ 2: В будни решение быстрее, чем в выходные
-    # В выходные время решения увеличивается на 30-50%
     if is_weekend(created_at):
-        day_multiplier = random.uniform(1.3, 1.5)  # Выходные - медленнее
+        day_multiplier = random.uniform(1.3, 1.5)
     else:
-        day_multiplier = random.uniform(0.7, 0.9)  # Будни - быстрее
-    
-    # Базовое время решения (15 минут) + зависимость от времени ответа
+        day_multiplier = random.uniform(0.7, 0.9)
+
     base_time = 15
     resolution_time = (base_time + response_impact) * complexity[category] * day_multiplier
-    
-    # Добавляем случайный шум, но сохраняем закономерности
+
     variation = random.uniform(0.85, 1.15)
     resolution_time = resolution_time * variation
-    
-    # Статистическая проверка: коэффициент корреляции между response_time и resolution_time
-    # должен быть высоким (подтверждение закономерности 1)
+
     
     return int(max(5, min(240, resolution_time)))
 
@@ -123,10 +110,8 @@ def generate_rating(category: str, response_time: int, resolution_time: int, cre
     """
     Генерация рейтинга с четкой зависимостью от времени обслуживания
     """
-    # Идеальное время обслуживания (ответ + решение)
     total_service_time = response_time + resolution_time
-    
-    # Идеальный сервис: до 30 минут
+
     if total_service_time <= 30:
         rating = 5
     elif total_service_time <= 45:
@@ -137,14 +122,12 @@ def generate_rating(category: str, response_time: int, resolution_time: int, cre
         rating = 3 if random.random() < 0.6 else 2
     else:
         rating = random.choice([1, 2])
-    
-    # Корректировка по категории
+
     if category == "Жалоба на качество" and rating > 3:
-        rating = max(3, rating - 1)  # Снижаем рейтинг для жалоб
+        rating = max(3, rating - 1)
     elif category == "Консультация" and rating < 4:
-        rating = min(4, rating + 1)  # Повышаем для консультаций
-    
-    # В выходные пользователи чуть более требовательны (есть время подумать о недостатках)
+        rating = min(4, rating + 1)
+
     if is_weekend(created_at) and rating > 3 and random.random() < 0.3:
         rating -= 1
     
@@ -154,21 +137,17 @@ def generate_rating(category: str, response_time: int, resolution_time: int, cre
 def generate_ticket_date() -> datetime:
     start_date = datetime(2025, 1, 1)
     end_date = datetime(2025, 12, 31)
-    
-    # Создаем дневной паттерн: больше обращений днем
+
     hour_weights = [1] * 24
-    for i in range(8, 20):  # Часы пик 8-20
+    for i in range(8, 20):
         hour_weights[i] = 4
-    
-    # В выходные паттерн другой - больше обращений во второй половине дня
+
     random_days = random.randint(0, (end_date - start_date).days)
     date = start_date + timedelta(days=random_days)
-    
-    # Корректируем веса часов в зависимости от дня недели
+
     if is_weekend(date):
-        # В выходные больше обращений после обеда
         hour_weights = [1] * 24
-        for i in range(11, 22):  # С 11 до 22 часов
+        for i in range(11, 22):
             hour_weights[i] = 5
     
     random_hours = random.choices(range(24), weights=hour_weights)[0]
@@ -191,13 +170,12 @@ def generate(num_rows: int, output_file: str, seed: int = SEED) -> None:
         "category",
     ]
 
-    # Храним данные для точного расчета KPI и проверки закономерностей
     resolutions = []
     responses = []
     ratings = []
     weekend_resolutions = []
     weekday_resolutions = []
-    correlation_pairs = []  # Для проверки корреляции
+    correlation_pairs = []
 
     with open(output_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -211,16 +189,14 @@ def generate(num_rows: int, output_file: str, seed: int = SEED) -> None:
             resolution_time = generate_resolution_time(category, response_time, created_at)
             
             rating = generate_rating(category, response_time, resolution_time, created_at)
-            
-            # Сохраняем для проверки закономерностей
+
             correlation_pairs.append((response_time, resolution_time))
             
             if is_weekend(created_at):
                 weekend_resolutions.append(resolution_time)
             else:
                 weekday_resolutions.append(resolution_time)
-            
-            # Случайно пропускаем рейтинг (10% заявок)
+
             if random.random() < 0.1:
                 rating = None
             else:
@@ -240,17 +216,14 @@ def generate(num_rows: int, output_file: str, seed: int = SEED) -> None:
                 }
             )
 
-    # Выводим точные KPI
     fast_response = sum(1 for r in responses if r < 15)
     fast_resolution = sum(1 for r in resolutions if r < 40)
     avg_resolution = sum(resolutions) / len(resolutions)
     avg_rating = sum(ratings) / len(ratings) if ratings else 0
 
-    # Проверяем закономерности
     avg_weekend_resolution = sum(weekend_resolutions) / len(weekend_resolutions) if weekend_resolutions else 0
     avg_weekday_resolution = sum(weekday_resolutions) / len(weekday_resolutions) if weekday_resolutions else 0
-    
-    # Вычисляем корреляцию между response_time и resolution_time
+
     if correlation_pairs:
         responses_list, resolutions_list = zip(*correlation_pairs)
         correlation = np.corrcoef(responses_list, resolutions_list)[0, 1]
