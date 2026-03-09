@@ -20,7 +20,9 @@ Customer Support — ID тикета, время реакции, время ре
 
 <details>
   <summary> <u> ___Код Python-файла___ </u> </summary>
+  
   * [Файл generate_data.py](/generate_data.py)
+
 </details>
 
 ### **Шаг №2. Были реализованы 3 CLI аргумента:**
@@ -65,8 +67,26 @@ Customer Support — ID тикета, время реакции, время ре
 ### **Шаг 3. Изменения лоадера в PostgreSQL**
 
 Был изменен DDL-скрипт
+<details><summary>Был изменен DDL-скрипт</summary>
+  
+  ```py
+  DDL = """
+  CREATE TABLE IF NOT EXISTS support_tickets (
+      ticket_id                INT PRIMARY KEY,
+      created_at               TIMESTAMP NOT NULL,
+      response_time_minutes    INT NOT NULL,
+      resolution_time_minutes  INT NOT NULL,
+      user_rating              INT,
+      category                 VARCHAR(50) NOT NULL
+  );
+  
+  CREATE INDEX IF NOT EXISTS idx_created_at ON support_tickets(created_at);
+  CREATE INDEX IF NOT EXISTS idx_category ON support_tickets(category);
+  CREATE INDEX IF NOT EXISTS idx_user_rating ON support_tickets(user_rating);
+  """
+  ```
 
-<img width="779" height="304" alt="image" src="https://github.com/user-attachments/assets/662559f2-5107-45ee-903e-cfca40cf7731" />
+</details>
 
 ### **Шаг 4. Изменение дашборда**
 
