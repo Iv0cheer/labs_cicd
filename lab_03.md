@@ -9,7 +9,7 @@
 
 ### Создание манифестов
 
-#### <details><summary>Файл postgres-deployment.yaml</summary>
+* <details><summary>Файл postgres-deployment.yaml</summary>
 
 ```yaml
 apiVersion: apps/v1
