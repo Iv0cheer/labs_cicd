@@ -7,6 +7,87 @@
 | Odoo                  | PostgreSQL                       | Развернуть ERP-систему Odoo. Проверить доступность веб-интерфейса и связь с БД. |
 
 
+### Создание манифестов
+
+#### <details><summary>Файл postgres-deployment.yaml</summary>
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "odoo"
+        - name: POSTGRES_USER
+          value: "odoo"
+        - name: POSTGRES_PASSWORD
+          value: "odoo"
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-storage
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+</details>
+
+#### <details><summary>Файл postgres-service.yaml</summary>
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+```
+
+</details>
+
+#### Файл odoo-deployment.yaml
+
+#### Файл odoo-service.yaml
+
+
+
+### Запуск сервиса и БД
+
 Запуск minikube
 
 <img width="997" height="281" alt="image" src="https://github.com/user-attachments/assets/c44c404b-6594-466e-8361-ec8cbf4c2f86" />
