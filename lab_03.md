@@ -9,7 +9,7 @@
 
 ### Создание манифестов
 
-<details><summary>Файл postgres-deployment.yaml</summary>
+<details><summary>**Файл postgres-deployment.yaml**</summary>
   
 ```yaml
 apiVersion: apps/v1
@@ -61,7 +61,7 @@ spec:
 ```
 </details>
 
-#### <details><summary>Файл postgres-service.yaml</summary>
+<details><summary>**Файл postgres-service.yaml**</summary>
 
 ```yaml
 apiVersion: v1
@@ -79,10 +79,88 @@ spec:
 
 </details>
 
-#### Файл odoo-deployment.yaml
 
-#### Файл odoo-service.yaml
+<details><summary>**Файл odoo-deployment.yaml**</summary>
 
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo-deployment
+  labels:
+    app: odoo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+  template:
+    metadata:
+      labels:
+        app: odoo
+    spec:
+      initContainers:
+      - name: init-odoo-db
+        image: odoo:17
+        command:
+          - odoo
+          - -d
+          - odoo
+          - --db_host=postgres-service
+          - --db_user=odoo
+          - --db_password=odoo
+          - --db_port=5432
+          - -i
+          - base
+          - --stop-after-init
+        env:
+        - name: HOST
+          value: "postgres-service"
+        - name: PORT
+          value: "5432"
+        - name: USER
+          value: "odoo"
+        - name: PASSWORD
+          value: "odoo"
+      containers:
+      - name: odoo
+        image: odoo:17
+        ports:
+        - containerPort: 8069
+        env:
+        - name: HOST
+          value: "postgres-service"
+        - name: PORT
+          value: "5432"
+        - name: USER
+          value: "odoo"
+        - name: PASSWORD
+          value: "odoo"
+        - name: DB_NAME
+          value: "odoo"
+```
+
+</details>
+
+<details><summary>**Файл odoo-service.yaml**</summary>
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: odoo-service
+spec:
+  type: NodePort
+  selector:
+    app: odoo
+  ports:
+    - protocol: TCP
+      port: 8069
+      targetPort: 8069
+      nodePort: 30019
+```
+
+</details>
 
 
 ### Запуск сервиса и БД
