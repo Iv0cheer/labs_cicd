@@ -9,6 +9,8 @@
 
 ### Создание манифестов
 
+<img width="261" height="125" alt="image" src="https://github.com/user-attachments/assets/74578bae-c253-425b-98bb-9eec5be0cad4" />
+
 <details><summary>**Файл postgres-deployment.yaml**</summary>
   
 ```yaml
