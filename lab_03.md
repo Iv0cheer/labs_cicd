@@ -9,8 +9,8 @@
 
 ### Создание манифестов
 
-* <details><summary>Файл postgres-deployment.yaml</summary>
-
+<details><summary>Файл postgres-deployment.yaml</summary>
+  
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -59,7 +59,6 @@ spec:
     requests:
       storage: 5Gi
 ```
-
 </details>
 
 #### <details><summary>Файл postgres-service.yaml</summary>
