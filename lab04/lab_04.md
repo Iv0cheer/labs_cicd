@@ -10,6 +10,7 @@
 
 <details><summary>Открыть структуру проекта</summary>
 
+```
 ↳ lab04_cicd
   ↳ backend
     ↳ Dockerfile
@@ -21,5 +22,6 @@
     ↳ requirements.txt
   ↳ k8s
     ↳ fullstack.yaml
+```
 
 </details>
