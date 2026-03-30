@@ -28,3 +28,85 @@
 
 
 </details>
+
+### Папка backend включает в себя 3 файла:
+
+#### Файл main.py
+
+Скрипт, работающий на основе API на FastAPI. Содержит в себе функции
+
+* Модели данных (как выглядят таблицы в постгри)
+* Логику обработки запросов
+* URL по которым можно обращаться к сервисам (API как раз)
+
+<details><summary>Листинг кода файла main.py</summary>
+
+```python
+
+```
+
+
+</details>
+
+#### Файл requirements.txt
+
+Содержит зависимости для любимого питона
+
+<details><summary>Листинг файла requirements.txt</summary>
+
+```python
+
+```
+
+</details>
+
+
+#### Файл backend/Dockerfile
+
+Содержит docker-образ бэкенда
+
+<details><summary>Листинг файла Dockerfile</summary>
+
+```python
+
+```
+
+</details>
+
+
+### Папка frontend включает в себя также 3 файла:
+
+#### requirements.txt
+
+Содержит зависимости для любимого питона
+
+<details><summary>Листинг файла requirements.txt</summary>
+
+```python
+
+```
+
+</details>
+
+
+#### Файл app.py
+
+Содержит UI для стримлита
+
+<details><summary>Листинг кода файла app.py</summary>
+
+```python
+
+```
+
+#### Файл frontend/Dockerfile
+
+Содержит docker-образ фронтА
+
+<details><summary>Листинг файла Dockerfile</summary>
+
+```python
+
+```
+
+</details>
