@@ -99,6 +99,8 @@
 
 ```
 
+</details>
+
 #### Файл frontend/Dockerfile
 
 Содержит docker-образ фронтА
