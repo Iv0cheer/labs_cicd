@@ -29,6 +29,8 @@
 
 </details>
 
+---
+
 ### Папка backend включает в себя 3 файла:
 
 #### Файл main.py
@@ -232,6 +234,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 </details>
 
+---
 
 ### Папка frontend включает в себя также 3 файла:
 
@@ -384,6 +387,7 @@ CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0
 
 </details>
 
+---
 
 ### Папка k8s и манифест:
 
@@ -567,6 +571,7 @@ spec:
 
 </details>
 
+---
 
 ### Сборка образов
 
@@ -588,6 +593,7 @@ spec:
 
 <img width="691" height="374" alt="image" src="https://github.com/user-attachments/assets/7a44d0b3-aca2-444b-8fd7-b14181426cb0" />
 
+---
 
 ### Проверка таблиц PostgreSQL
 
@@ -613,6 +619,7 @@ spec:
 
 </details>
 
+---
 
 ### Проверка стримлита
 
@@ -634,6 +641,8 @@ spec:
 
 </details>
 
+---
+
 ### Проверка заполненности таблиц в PGAdmin4
 
 <details><summary>Таблица options</summary>
@@ -654,6 +663,7 @@ spec:
 
 </details>
 
+---
 
 ## Проблемы при работе с лабораторной работой
 
