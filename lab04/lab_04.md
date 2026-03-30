@@ -24,4 +24,7 @@
     ↳ fullstack.yaml
 ```
 
+<img width="272" height="220" alt="image" src="https://github.com/user-attachments/assets/b0cd9806-837f-498e-9680-1ad6bdf3cf62" />
+
+
 </details>
